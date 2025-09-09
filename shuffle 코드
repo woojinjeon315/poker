@@ -1,1 +1,53 @@
+# 실수 나오는거랑 셔플 하나 하면 알고리즘은 끝
 
+card = [
+    # 52
+    # Spades
+    ['spade', 'A'], ['spade', 'K'], ['spade', 'Q'], ['spade', 'J'], ['spade', '10'], 
+    ['spade', '9'], ['spade', '8'], ['spade', '7'], ['spade', '6'], ['spade', '5'], 
+    ['spade', '4'], ['spade', '3'], ['spade', '2'],
+    
+    # Hearts
+    ['heart', 'A'], ['heart', 'K'], ['heart', 'Q'], ['heart', 'J'], ['heart', '10'], 
+    ['heart', '9'], ['heart', '8'], ['heart', '7'], ['heart', '6'], ['heart', '5'], 
+    ['heart', '4'], ['heart', '3'], ['heart', '2'],
+    
+    # Diamonds
+    ['diamond', 'A'], ['diamond', 'K'], ['diamond', 'Q'], ['diamond', 'J'], ['diamond', '10'],
+    ['diamond', '9'], ['diamond', '8'], ['diamond', '7'], ['diamond', '6'], ['diamond', '5'],
+    ['diamond', '4'], ['diamond', '3'], ['diamond', '2'],
+    
+    # Clubs
+    ['club', 'A'], ['club', 'K'], ['club', 'Q'], ['club', 'J'], ['club', '10'],
+    ['club', '9'], ['club', '8'], ['club', '7'], ['club', '6'], ['club', '5'],
+    ['club', '4'], ['club', '3'], ['club', '2']
+]
+
+def hindu_suffle(card, seed_number):
+    mixed_card = []
+    mixed_card = card[seed_number:]
+    mixed_card.extend(card)
+
+    return mixed_card
+
+def klondike_shuffle(card):#위아래 한장씩 뽑고 그걸 아래로
+    mixed_card = []
+    for turn in range(26):
+        mixed_card.extend([card[25 - turn],card[26 + turn]])
+
+    return mixed_card
+
+def pile_shuffle(card, seed_number): #딜셔플
+    # number = 2 ~ 52
+    number = int(52 / seed_number) #실수 나옴 해결 바람
+    mixed_card = []
+    for turn2 in range(seed_number):
+        for turn in range(number):
+            if ((seed_number * turn) + turn2 < 52):
+                mixed_card.append(card[(seed_number * turn) + turn2])
+                # print(card[(seed_number * turn) + turn2])
+    return mixed_card
+
+# hindu_suffle(card, 20)
+klondike_shuffle(card)
+(pile_shuffle(card, 4))
