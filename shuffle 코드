@@ -48,6 +48,15 @@ def pile_shuffle(card, seed_number): #딜셔플
                 # print(card[(seed_number * turn) + turn2])
     return mixed_card
 
+def riffle_shuffle(card, number): #책
+    mixed_card = []
+    for turn in range(0,52,2):
+        add_number = number + turn
+        add_number = add_number % 52
+        mixed_card.append(card[add_number])
+        mixed_card.append(card[turn + 1])
+    return mixed_card
+
 # hindu_suffle(card, 20)
 klondike_shuffle(card)
 (pile_shuffle(card, 4))
