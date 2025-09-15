@@ -43,9 +43,11 @@ def pile_shuffle(card, seed_number):
     number = int(52 / seed_number) + 1
     mixed_card = []
     for turn2 in range(seed_number):
-        for turn in range(number):
+        for turn in range(number, -1 , -1):
             if ((seed_number * turn) + turn2 < 52):
+                print((seed_number * turn) + turn2)
                 mixed_card.append(card[(seed_number * turn) + turn2])
+
     return mixed_card
 
 def riffle_shuffle(card, number):
@@ -55,9 +57,27 @@ def riffle_shuffle(card, number):
         add_number = add_number % 52
         mixed_card.append(card[add_number])
         mixed_card.append(card[turn + 1])
+
     return mixed_card
 
+################################# 
+주석
+#card
+#포커 카드가 처음 카드집에 들어있는 순서
 
+# hindu_suffle(card, seed_number)
+#시드 값에 따라 분리후 위와 아래를 바꾸어 합칩니다.
+
+# klondike_shuffle(card)
+#윗장과 아랫장을 빼서 따로빼고 그위에 앞에말한 행위를 반복
+
+# pile_shuffle(card, seed_number)
+#시드 값만큼 카드를 분리 합니다. 윗장부터 순서대로 분리후 순서대로 제결합
+#기본원리는 위와 같고 코드 간결성을 위해 시드값에 배수를 역전시켜서 순서대로 결합
+#숫자는 4~10 사이정도가 적당
+
+# riffle_shuffle(card, number)
+#지금 작성된 코드는 카드를 두그룹으로 나눈뒤 책처럼 합치는게 아닌 짝수와 홀수를 일정 시드에 교차하여 합치는 꼴
 
 ###################################
 
