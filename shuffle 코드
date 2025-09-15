@@ -1,62 +1,104 @@
-# 실수 나오는거랑 셔플 하나 하면 알고리즘은 끝
-
 card = [
     # 52
     # Spades
-    ['spade', 'A'], ['spade', 'K'], ['spade', 'Q'], ['spade', 'J'], ['spade', '10'], 
-    ['spade', '9'], ['spade', '8'], ['spade', '7'], ['spade', '6'], ['spade', '5'], 
+    ['spade', 'A'], ['spade', 'K'], ['spade', 'Q'], ['spade', 'J'], ['spade', '10'],
+    ['spade', '9'], ['spade', '8'], ['spade', '7'], ['spade', '6'], ['spade', '5'],
     ['spade', '4'], ['spade', '3'], ['spade', '2'],
-    
+
     # Hearts
-    ['heart', 'A'], ['heart', 'K'], ['heart', 'Q'], ['heart', 'J'], ['heart', '10'], 
-    ['heart', '9'], ['heart', '8'], ['heart', '7'], ['heart', '6'], ['heart', '5'], 
+    ['heart', 'A'], ['heart', 'K'], ['heart', 'Q'], ['heart', 'J'], ['heart', '10'],
+    ['heart', '9'], ['heart', '8'], ['heart', '7'], ['heart', '6'], ['heart', '5'],
     ['heart', '4'], ['heart', '3'], ['heart', '2'],
-    
+
     # Diamonds
     ['diamond', 'A'], ['diamond', 'K'], ['diamond', 'Q'], ['diamond', 'J'], ['diamond', '10'],
     ['diamond', '9'], ['diamond', '8'], ['diamond', '7'], ['diamond', '6'], ['diamond', '5'],
     ['diamond', '4'], ['diamond', '3'], ['diamond', '2'],
-    
+
     # Clubs
     ['club', 'A'], ['club', 'K'], ['club', 'Q'], ['club', 'J'], ['club', '10'],
     ['club', '9'], ['club', '8'], ['club', '7'], ['club', '6'], ['club', '5'],
     ['club', '4'], ['club', '3'], ['club', '2']
 ]
 
+# seed_number = 2 ~ 52
+
 def hindu_suffle(card, seed_number):
+    seed_number = seed_number % 52
     mixed_card = []
     mixed_card = card[seed_number:]
-    mixed_card.extend(card)
+    mixed_card.extend(card[:seed_number])
 
     return mixed_card
 
-def klondike_shuffle(card):#위아래 한장씩 뽑고 그걸 아래로
+def klondike_shuffle(card):
     mixed_card = []
     for turn in range(26):
         mixed_card.extend([card[25 - turn],card[26 + turn]])
 
     return mixed_card
 
-def pile_shuffle(card, seed_number): #딜셔플
-    # number = 2 ~ 52
-    number = int(52 / seed_number) #실수 나옴 해결 바람
+def pile_shuffle(card, seed_number):
+    seed_number = seed_number % 52
+    number = int(52 / seed_number) + 1
     mixed_card = []
     for turn2 in range(seed_number):
         for turn in range(number):
             if ((seed_number * turn) + turn2 < 52):
                 mixed_card.append(card[(seed_number * turn) + turn2])
-                # print(card[(seed_number * turn) + turn2])
     return mixed_card
 
-def riffle_shuffle(card, number): #책
+def riffle_shuffle(card, number):
     mixed_card = []
     for turn in range(0,52,2):
-        add_number = number + turn
+        add_number = (number * 2) + turn
         add_number = add_number % 52
         mixed_card.append(card[add_number])
         mixed_card.append(card[turn + 1])
     return mixed_card
 
-# hindu_suffle(card, 20)
-klondike_shuffle(card)
-(pile_shuffle(card, 4))
+
+
+###################################
+
+
+#검사 함수
+
+def aaa(card):
+    a = []
+    for i in range(1,52):
+        a.extend(riffle_shuffle(card, i))
+        # riffle_shuffle(card,19)
+        ss = sorted(card)
+        aa = sorted(a)
+        re = []
+        print(ss == aa)
+        aa = sorted(a)
+        print(i)
+        print(len(a))
+        # print(a)
+        a = []
+
+def have_same_elements_sorted(list1, list2):
+  if len(list1) != len(list2):
+    return False
+  return sorted(list1) == sorted(list2)
+# print(aaa(card))
+
+
+# print(have_same_elements_sorted(card,list(klondike_shuffle(card))))
+# print(have_same_elements_sorted(card,list(hindu_suffle(card, 20))))
+# print(have_same_elements_sorted(card,list(riffle_shuffle(card,19))))
+# print(have_same_elements_sorted(card,list(pile_shuffle(card, 11))))
+# print(pile_shuffle(card, 11))
+# print(len(pile_shuffle(card, 11)))
+
+# print(len(klondike_shuffle(card)))
+# print(len(hindu_suffle(card, 10)))
+# print(len(riffle_shuffle(card,29)))
+# print(len(pile_shuffle(card, 4)))
+# print(card,list(riffle_shuffle(card,19)))
+
+# riffle_shuffle(card,3)
+hindu_suffle(card, 200)
+#리플수정 필요 나머지는 다 맞음
