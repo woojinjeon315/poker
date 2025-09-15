@@ -50,7 +50,17 @@ def pile_shuffle(card, seed_number):
 
     return mixed_card
 
-def riffle_shuffle(card, number):
+def riffle_shuffle(card, seed_number):
+    mixed_card = []
+    for turn in range(0,26,1):
+        add_turn = (turn + 26 + seed_number)
+        add_turn = add_turn % 52
+        mixed_card.append(card[add_turn])
+        mixed_card.append(card[turn])
+
+    return mixed_card
+
+def f_riffle_shuffle(card, number):
     mixed_card = []
     for turn in range(0,52,2):
         add_number = (number * 2) + turn
@@ -77,7 +87,10 @@ def riffle_shuffle(card, number):
 #숫자는 4~10 사이정도가 적당
 
 # riffle_shuffle(card, number)
-#지금 작성된 코드는 카드를 두그룹으로 나눈뒤 책처럼 합치는게 아닌 짝수와 홀수를 일정 시드에 교차하여 합치는 꼴
+#카드를 상부 하부로 나누어 시드값에 따라 서로 곂치게 반복 하여 결합
+
+# f_riffle_shuffle(card, number)
+# 짝수와 홀수를 나누어 시드값에 따라 결합
 
 ###################################
 
