@@ -1,0 +1,43 @@
+class Player:
+
+    def __init__(self, name, chip, is_playing):
+        self.name = name
+        self.chip = chip
+        self.hand = []
+        self.current_bet = 0
+        self.is_playing = True
+
+    def bet(self, amount):
+        if (self.chip <= amount):
+            self.current_bet += self.chip
+            self.chip = 0
+        else:
+            self.current_bet += amount
+            self.chip -= amount
+        return
+
+    def check(self):
+        self.is_playing = True
+        return
+
+    def fold(self):
+        self.is_playing = False
+        return
+
+    def increase_chip(self, amount):
+        self.chip = self.chip + amount
+        return
+
+    # def decrease_chip(self, amount):
+    #     self.chip = self.chip - amount
+    #     return
+
+    def receive_card(self, card_list):
+        self.hand.extend(card_list)
+        return
+
+    def clear(self):
+        self.hand = []
+        self.current_bet = 0
+        self.is_playing = True
+        return
