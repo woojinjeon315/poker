@@ -21,6 +21,138 @@ card = [
     ['club', '4'], ['club', '3'], ['club', '2']
 ]
 
+field = [['spade', '9'],['club', '6'],['heart', '10'],['club', '2'],['heart', '6']]
+# player_card_list = [['A',['diamond', '8'],['diamond', '7']],['B',['club', '9',],['spade', '10']]]
+player_card_list = [['diamond', '8'],['diamond', 'k']]
+
+
+def win_distinction(field, player_card_list):
+
+    ROYAL_FLUSH = False
+    STRAIGHT_FLUSH = False
+    FOUR_OF_A_KIND = False
+    FULL_HOUSE = False
+    FLUSH = False
+    STRAIGHT = False
+    THREE_OF_A_KIND = False
+    TWO_PAIR = False
+    ONE_PAIR = False
+    HIGH_CARD = False
+
+    royal_flush = []
+
+    score = 0
+    card_list = []
+    card_number_temp = []
+
+    pair = 0
+    triple = False
+    quadruple = False
+    flush = False
+    stright = False
+
+    card_list.extend(field)
+    card_list.extend(player_card_list)
+
+    # high_card_score = int(player_card_list[0][1]) + int(player_card_list[1][1]) # 영어들 숫자로 변환해야됨
+
+    ### 플러쉬 판별 해야함
+    player_card_pattern = []
+    pattern_count = 0
+    pattern_list = ['spade', 'heart', 'diamond', 'club']
+
+    # for card_listf in card_list:
+    #     player_card_pattern.append(card_listf[0])
+    player_card_pattern = list(map(lambda x : x[0],card_list))
+
+
+    ###
+    # for card_listf in card_list: #영어들 숫자로 변환해야됨
+    #     card_number_temp.append(int(card_listf[1]))
+
+    card_number_temp = list(map(lambda x : x[1],card_list))
+
+    sorted_card_number_temp = sorted(card_number_temp)
+
+    print(sorted_card_number_temp)
+
+    # card_number_temp = ['6', '7', '8', '9', '10', '2', '4'] #코드 완성후 삭제바람
+
+    # for card_number_tempf in card_number_temp:
+    #     if (card_number_temp.count(card_number_tempf) == 2):
+    #         pair += 1
+    #         print('p')
+    #     elif (card_number_temp.count(card_number_tempf) == 3):
+    #         triple = True
+    #     elif (card_number_temp.count(card_number_tempf) == 4):
+    #         quadruple = True
+
+    #     print(card_number_temp.count(card_number_tempf))
+
+    turn = 0
+    while turn <= 6:
+        if (card_number_temp[turn:].count(card_number_temp[turn]) == 2):
+            pair += 1
+            print('p')
+        elif (card_number_temp[turn:].count(card_number_temp[turn]) == 3):
+            triple = True
+        elif (card_number_temp[turn:].count(card_number_temp[turn]) == 4):
+            quadruple = True
+
+
+    # true 쓰지말고 비트연산후 리턴값으로 바로내보낼 코드생각좀/..
+    if (stright and flush):
+        STRAIGHT_FLUSH = True
+    elif (pair == 4):
+        FOUR_OF_A_KIND = True
+    elif (triple and (pair > 0)):
+        FULL_HOUSE = True
+    # elif (); #flush
+
+    # elif (): #straight
+
+    elif (pair == 3):
+        THREE_OF_A_KIND = True
+    elif (pair == 2):
+        TWO_PAIR = True
+    elif (pair == 1):
+        ONE_PAIR = True
+    else:
+        HIGH_CARD = True
+
+
+win_distinction(field, player_card_list)
+    # number_temp.append(int(player_card_list[0][1]))
+    # number_temp.append(int(player_card_list[0][1]))
+
+
+
+
+#################################
+
+card = [
+    # 52
+    # Spades
+    ['spade', 'A'], ['spade', 'K'], ['spade', 'Q'], ['spade', 'J'], ['spade', '10'],
+    ['spade', '9'], ['spade', '8'], ['spade', '7'], ['spade', '6'], ['spade', '5'],
+    ['spade', '4'], ['spade', '3'], ['spade', '2'],
+
+    # Hearts
+    ['heart', 'A'], ['heart', 'K'], ['heart', 'Q'], ['heart', 'J'], ['heart', '10'],
+    ['heart', '9'], ['heart', '8'], ['heart', '7'], ['heart', '6'], ['heart', '5'],
+    ['heart', '4'], ['heart', '3'], ['heart', '2'],
+
+    # Diamonds
+    ['diamond', 'A'], ['diamond', 'K'], ['diamond', 'Q'], ['diamond', 'J'], ['diamond', '10'],
+    ['diamond', '9'], ['diamond', '8'], ['diamond', '7'], ['diamond', '6'], ['diamond', '5'],
+    ['diamond', '4'], ['diamond', '3'], ['diamond', '2'],
+
+    # Clubs
+    ['club', 'A'], ['club', 'K'], ['club', 'Q'], ['club', 'J'], ['club', '10'],
+    ['club', '9'], ['club', '8'], ['club', '7'], ['club', '6'], ['club', '5'],
+    ['club', '4'], ['club', '3'], ['club', '2']
+]
+
 field = [['spade', '9'],['club', '6'],['heart', '10']]
 # player_card_list = [['A',['diamond', '8'],['diamond', '7']],['B',['club', '9',],['spade', '10']]]
 player_card_list = [['diamond', '8'],['diamond', 'k']]
