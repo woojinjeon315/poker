@@ -1,0 +1,26 @@
+# seed = 0
+
+def encoding(data):
+
+    temp_list = []
+
+    for dataf in data:
+        temp_list.append(str(ord(dataf)))
+
+    return '\t'.join(temp_list)
+
+def decoding(data):
+    temp_list = []
+
+    data_list = data.split('\t')
+
+    for data_listf in data_list:
+        temp_list.append(chr(int(data_listf)))
+
+    return ''.join(temp_list)
+
+a = "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세"
+s = '46041\t54644\t47932\t44284\t32\t48177\t46160\t49328\t51060\t32\t47560\t47476\t44256\t32\t45811\t46020\t47197\t32\t54616\t45712\t45784\t51060\t32\t48372\t50864\t54616\t49324\t32\t50864\t47532\t45208\t46972\t47564\t49464\t32\t47924\t44417\t54868\t32\t49340\t52380\t47532\t32\t54868\t47140\t44053\t49328\t32\t45824\t54620\t49324\t46988\t32\t45824\t54620\t51004\t47196\t32\t44600\t51060\t32\t48372\t51204\t54616\t49464'
+
+encoding(a)
+decoding(s)
