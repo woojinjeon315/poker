@@ -113,6 +113,179 @@ def win_distinction(field, player_card_list):
             pair += 1
 
     #스트레이트 판별
+    # card_number_temp
+    card_number_index_temp = []
+    for number_listf in number_list:
+        if (number_listf in card_number_temp):
+            card_number_index_temp.append(card_number_temp.index(number_listf))
+    sorted_card_number_index_temp = sorted(card_number_index_temp)
+    scnit_0 = sorted_card_number_index_temp[0]
+    if (sorted_card_number_index_temp == [scnit_0, scnit_0 + 1, scnit_0 + 2, scnit_0 + 3, scnit_0 + 4]):
+        straight = True
+
+
+
+    # true 쓰지말고 비트연산후 리턴값으로 바로내보낼 코드생각좀/..
+    if (stright and flush):
+        STRAIGHT_FLUSH = True
+        return 'STRAIGHT_FLUSH'
+    elif (pair == 4):
+        FOUR_OF_A_KIND = True
+        return 'FOUR_OF_A_KIND'
+
+    elif (triple and (pair > 0)):
+        FULL_HOUSE = True
+        return 'FULL_HOUSE'
+
+    elif (flush): #flush
+        FLUSH = True
+        return 'FLUSH'
+
+    elif (straight == True): #straight
+        STRAIGHT = True
+        return 'STRAIGHT'
+
+    elif (triple):
+        THREE_OF_A_KIND = True
+        return 'THREE_OF_A_KIND'
+
+    elif (pair == 2):
+        TWO_PAIR = True
+        return 'TWO_PAIR'
+
+    elif (pair == 1):
+        ONE_PAIR = True
+        return 'ONE_PAIR'
+
+    else:
+        HIGH_CARD = True
+        return 'HIGH_CARD'
+
+
+
+win_distinction(field, player_card_list)
+    # number_temp.append(int(player_card_list[0][1]))
+    # number_temp.append(int(player_card_list[0][1]))
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+card = [
+    # 52
+    # Spades
+    ['spade', 'A'], ['spade', 'K'], ['spade', 'Q'], ['spade', 'J'], ['spade', '10'],
+    ['spade', '9'], ['spade', '8'], ['spade', '7'], ['spade', '6'], ['spade', '5'],
+    ['spade', '4'], ['spade', '3'], ['spade', '2'],
+
+    # Hearts
+    ['heart', 'A'], ['heart', 'K'], ['heart', 'Q'], ['heart', 'J'], ['heart', '10'],
+    ['heart', '9'], ['heart', '8'], ['heart', '7'], ['heart', '6'], ['heart', '5'],
+    ['heart', '4'], ['heart', '3'], ['heart', '2'],
+
+    # Diamonds
+    ['diamond', 'A'], ['diamond', 'K'], ['diamond', 'Q'], ['diamond', 'J'], ['diamond', '10'],
+    ['diamond', '9'], ['diamond', '8'], ['diamond', '7'], ['diamond', '6'], ['diamond', '5'],
+    ['diamond', '4'], ['diamond', '3'], ['diamond', '2'],
+
+    # Clubs
+    ['club', 'A'], ['club', 'K'], ['club', 'Q'], ['club', 'J'], ['club', '10'],
+    ['club', '9'], ['club', '8'], ['club', '7'], ['club', '6'], ['club', '5'],
+    ['club', '4'], ['club', '3'], ['club', '2']
+]
+
+field = [['spade', '9'],['club', '6'],['heart', '10'],['club', '2'],['heart', '6']]
+# player_card_list = [['A',['diamond', '8'],['diamond', '7']],['B',['club', '9',],['spade', '10']]]
+player_card_list = [['diamond', '8'],['diamond', 'k']]
+
+
+def win_distinction(field, player_card_list):
+
+    ROYAL_FLUSH = False
+    STRAIGHT_FLUSH = False
+    FOUR_OF_A_KIND = False
+    FULL_HOUSE = False
+    FLUSH = False
+    STRAIGHT = False
+    THREE_OF_A_KIND = False
+    TWO_PAIR = False
+    ONE_PAIR = False
+    HIGH_CARD = False
+
+    royal_flush = []
+
+    score = 0
+    card_list = []
+    card_number_temp = []
+
+    pair = 0
+    triple = False
+    quadruple = False
+    flush = False
+    stright = False
+
+    card_list.extend(field)
+    card_list.extend(player_card_list)
+
+    # high_card_score = int(player_card_list[0][1]) + int(player_card_list[1][1]) # 영어들 숫자로 변환해야됨
+
+    player_card_pattern = []
+    pattern_count = 0
+    pattern_list = ['spade', 'heart', 'diamond', 'club']
+    number_list = ['A', 'K', 'Q', 'J' ,'10', '9' ,'8' ,'7' ,'6' ,'5' ,'4' ,'3' ,'2', 'A']
+    ### 플러쉬 판별 해야함
+
+    # for card_listf in card_list:
+    #     player_card_pattern.append(card_listf[0])
+    player_card_pattern = list(map(lambda x : x[0],card_list))
+
+    for pattern_listf in pattern_list:
+        if player_card_pattern.count(pattern_listf) >= 5:
+            flush = True
+
+    ###
+    # for card_listf in card_list: #영어들 숫자로 변환해야됨
+    #     card_number_temp.append(int(card_listf[1]))
+
+    card_number_temp = list(map(lambda x : x[1],card_list))
+
+    # sorted_card_number_temp = sorted(card_number_temp) #정렬하면 문자들에 문제 생김
+
+    # print(sorted_card_number_temp)
+
+    # card_number_temp = ['6', '7', '8', '9', '10', '2', '4'] #코드 완성후 삭제바람
+
+    # for card_number_tempf in card_number_temp:
+    #     if (card_number_temp.count(card_number_tempf) == 2):
+    #         pair += 1
+    #         print('p')
+    #     elif (card_number_temp.count(card_number_tempf) == 3):
+    #         triple = True
+    #     elif (card_number_temp.count(card_number_tempf) == 4):
+    #         quadruple = True
+
+    #     print(card_number_temp.count(card_number_tempf))
+
+    # turn = 0
+    # while turn <= 6: #트리플일때 트리플로 한번에 안보고 트리플로 보고 페어로 보겠네 ㅅㅂ 수정좀 또 페어를 먼저보면 트리플을 못보니 순서 변경좀
+    #     if (card_number_temp[turn:].count(card_number_temp[turn]) == 2):
+    #         pair += 1
+    #         print('p')
+    #     elif (card_number_temp[turn:].count(card_number_temp[turn]) == 3):
+    #         triple = True
+    #     elif (card_number_temp[turn:].count(card_number_temp[turn]) == 4):
+    #         quadruple = True
+
+    #페어 트리플 쿼터플 판별
+    for number_listf in number_list[-1]: #트리플일때 하이카드 작동되는지 확인바람
+        if (card_number_temp.count(number_listf) == 4):
+            quadruple = True
+        elif (card_number_temp.count(number_listf) == 3):
+            triple = True
+        elif (card_number_temp.count(number_listf) == 2):
+            pair += 1
+
+    #스트레이트 판별
     card_number_temp
 
         
